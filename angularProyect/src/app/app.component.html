@@ -1,7 +1,20 @@
+<h1>Proyecto de ANGULAR</h1>
 <div>
-    <h1>Proyecto de ANGULAR</h1>
+  <h2>Directiva nfIf</h2>
+  <div *ngIf="mostrarTexto">
+    ¡Este texto solo se muestra si `mostrarTexto` es verdadero!
+  </div>
+  <button *ngIf="mostrarTexto" (click)="mostrarTexto = false">Ocultar texto</button>
+  <button *ngIf="!mostrarTexto" (click)="mostrarTexto = true">Mostrar texto</button>
+</div>
+
+<div>
+  <h2>Directivas de atributo pasivo</h2>
   <div>
-    <h2>Directivas de atributo</h2>
+    <!-- Cambia el color del texto a rojo -->
     <p [ngStyle]="{'color':'red','background-color':'#ff0','text-align':'center'}">ngStyle</p> 
+    <!-- Cambia el color del fondo a azul -->
     <div><p [ngStyle]="colorEstado">Ejemplo</p></div>
   </div>
+</div>
+  
