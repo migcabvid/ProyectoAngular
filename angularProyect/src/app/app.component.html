@@ -17,10 +17,15 @@
   <div class="espacio">
     <h2>Directiva ngStyle</h2>
     <div>
-      <!-- Cambia el color del texto a rojo -->
-      <p [ngStyle]="{'color':'red','background-color':'#ff0','text-align':'center'}">ngStyle</p>
-      <!-- Cambia el color del fondo a azul -->
-      <p [ngStyle]="colorEstado">Ejemplo</p>
+      <!-- Cambia el color del texto -->
+      <p [ngStyle]="{'color':'red','text-align':'center', 'text-decoration':'underline', 'text-decoration-color':'blue'}">Texto coloreado</p>
+      <!-- Cambia el color del texto -->
+      <p [ngStyle]="colorEstado">Texto coloreado</p>
+      <!-- Cambia el formato del texto -->
+      <p [ngStyle]="{'font-size':'20px', 'font-style':'italic'}">Texto cursiva</p>
+      <!-- Cambia el formato del texto -->
+      <p [ngStyle]="formatoTexto">Texto cursiva</p>
+    
     </div>
   </div>
 </div>

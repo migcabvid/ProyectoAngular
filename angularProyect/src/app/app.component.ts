@@ -15,10 +15,16 @@ export class AppComponent {
   // Variables para el ejemplo de nfStyle
   colorEstado = {
     "color": "red",
-    "background-color": "blue",
-    "text-align": "center"
+    "text-align": "center",
+    "text-decoration": "underline",
+    "text-decoration-color": "blue"
   };
 
-   // Lista para la directiva ngFor
-   lista: string[] = ['Elemento 1', 'Elemento 2', 'Elemento 3', 'Elemento 4'];
+  formatoTexto = {
+    "font-size": "20px",
+    "font-style": "italic"
+  };
+
+  // Lista para la directiva ngFor
+  lista: string[] = ['Elemento 1', 'Elemento 2', 'Elemento 3', 'Elemento 4'];
 }
