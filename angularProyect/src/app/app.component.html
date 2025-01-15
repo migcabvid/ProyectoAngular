@@ -1,20 +1,37 @@
-<h1>Proyecto de ANGULAR</h1>
 <div>
-  <h2>Directiva nfIf</h2>
-  <div *ngIf="mostrarTexto">
-    ¡Este texto solo se muestra si `mostrarTexto` es verdadero!
-  </div>
-  <button *ngIf="mostrarTexto" (click)="mostrarTexto = false">Ocultar texto</button>
-  <button *ngIf="!mostrarTexto" (click)="mostrarTexto = true">Mostrar texto</button>
+  <h1>Proyecto de ANGULAR</h1>
 </div>
 
-<div>
-  <h2>Directivas de atributo pasivo</h2>
-  <div>
-    <!-- Cambia el color del texto a rojo -->
-    <p [ngStyle]="{'color':'red','background-color':'#ff0','text-align':'center'}">ngStyle</p> 
-    <!-- Cambia el color del fondo a azul -->
-    <div><p [ngStyle]="colorEstado">Ejemplo</p></div>
+<div class="border">
+  <div class="espacio">
+    <h2>Directiva ngIf</h2>
+    <div *ngIf="mostrarTexto">
+      ¡Este texto solo se muestra si `mostrarTexto` es verdadero!
+    </div>
+    <button *ngIf="mostrarTexto" (click)="mostrarTexto = false">Ocultar texto</button>
+    <button *ngIf="!mostrarTexto" (click)="mostrarTexto = true">Mostrar texto</button>
   </div>
 </div>
-  
+
+<div class="border">
+  <div class="espacio">
+    <h2>Directiva ngStyle</h2>
+    <div>
+      <!-- Cambia el color del texto a rojo -->
+      <p [ngStyle]="{'color':'red','background-color':'#ff0','text-align':'center'}">ngStyle</p>
+      <!-- Cambia el color del fondo a azul -->
+      <p [ngStyle]="colorEstado">Ejemplo</p>
+    </div>
+  </div>
+</div>
+
+<div class="border">
+  <div class="espacio">
+    <h2>Directiva ngFor</h2>
+    <ul>
+      <li *ngFor="let item of lista">
+        {{ item }}
+      </li>
+    </ul>
+  </div>
+</div>
