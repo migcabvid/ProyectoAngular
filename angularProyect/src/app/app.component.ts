@@ -27,4 +27,7 @@ export class AppComponent {
 
   // Lista para la directiva ngFor
   lista: string[] = ['Elemento 1', 'Elemento 2', 'Elemento 3', 'Elemento 4'];
+
+  // Variables para el ejemplo de ngSwitch
+  color: string = 'azul';
 }

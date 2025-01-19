@@ -15,28 +15,60 @@
 
 <div class="border">
   <div class="espacio">
-    <h2>Directiva ngStyle</h2>
-    <div>
-      <!-- Cambia el color del texto -->
-      <p [ngStyle]="{'color':'red','text-align':'center', 'text-decoration':'underline', 'text-decoration-color':'blue'}">Texto coloreado</p>
-      <!-- Cambia el color del texto -->
-      <p [ngStyle]="colorEstado">Texto coloreado</p>
-      <!-- Cambia el formato del texto -->
-      <p [ngStyle]="{'font-size':'20px', 'font-style':'italic'}">Texto cursiva</p>
-      <!-- Cambia el formato del texto -->
-      <p [ngStyle]="formatoTexto">Texto cursiva</p>
-    
-    </div>
-  </div>
-</div>
-
-<div class="border">
-  <div class="espacio">
     <h2>Directiva ngFor</h2>
     <ul>
       <li *ngFor="let item of lista">
         {{ item }}
       </li>
     </ul>
+  </div>
+</div>
+
+<div class="border">
+  <div class="espacio">
+    <h2>Directiva ngSwitch</h2>
+    <p>La directiva ngSwitch en Angular permite mostrar o esconder elementos basándose en una expresión. Funciona de
+      manera similar a una declaración switch en otros lenguajes de programación. Se utiliza junto con ngSwitchCase y
+      ngSwitchDefault para definir las diferentes condiciones y casos.</p>
+    <div>
+      <h4>Ejemplo:</h4>
+      <div [ngSwitch]="color">
+        <p *ngSwitchCase="'azul'">
+          El color es el Azul
+        </p>
+        <p *ngSwitchCase="'verde'">
+          El color es el Verde
+        </p>
+        <p *ngSwitchCase="'rojo'">
+          El color es el Rojo
+        </p>
+        <p *ngSwitchDefault>
+          No hay ningún color
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="border">
+  <div class="espacio">
+    <h2>Directiva ngStyle</h2>
+    <p>La directiva ngStyle en Angular permite aplicar estilos CSS de manera dinámica a un elemento HTML. Se utiliza
+      para establecer uno o más estilos CSS en un elemento en función de una expresión. Esto es útil para cambiar
+      estilos en tiempo de ejecución basándose en datos del componente.</p>
+    <div>
+      <h4>Ejemplos:</h4>
+      <!-- Cambia el color del texto -->
+      <p
+        [ngStyle]="{'color':'red','text-align':'center', 'text-decoration':'underline', 'text-decoration-color':'blue'}">
+        Texto coloreado</p>
+      <!-- Cambia el color del texto -->
+      <p [ngStyle]="colorEstado">Texto coloreado</p>
+      <!-- Cambia el formato del texto -->
+      <p [ngStyle]="{'font-size':'20px', 'font-style':'italic'}">Texto cursiva</p>
+      <!-- Cambia el formato del texto -->
+      <p [ngStyle]="formatoTexto">Texto cursiva</p>
+
+    </div>
   </div>
 </div>
