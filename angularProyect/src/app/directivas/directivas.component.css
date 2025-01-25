@@ -30,10 +30,3 @@ p {
 .espacio {
     margin: 20px;
 }
-
-header {
-    background-color: #f8f9fa; /* Color de fondo */
-    padding: 20px; /* Espaciado interno */
-    border-bottom: 2px solid #e0e0e0; /* Borde inferior */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
-}
