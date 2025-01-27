@@ -1,10 +1,9 @@
 <div>
   <button (click)="mostrarContenido('btn1')">Directivas</button>
-  <button (click)="mostrarContenido('btn2')">Componentes</button>
+  <button (click)="mostrarContenido('btn2')">Formulario</button>
   <button (click)="mostrarContenido('btn3')">Eventos</button>
   <button (click)="mostrarContenido('btn4')">Enrutamiento</button>
-  <button (click)="mostrarContenido('btn5')">Formularios</button>
-  <button (click)="mostrarContenido('btn6')">Acceso a Datos</button>
+  <button (click)="mostrarContenido('btn5')">Acceso a Datos</button>
 </div>
 
 <div [ngSwitch]="vistaActual">
@@ -12,7 +11,7 @@
     <app-directivas></app-directivas>
   </ng-container>
   <ng-container *ngSwitchCase="'btn2'">
-    <h1>Componentes</h1>
+    <h1>Formularios</h1>
   </ng-container>
   <ng-container *ngSwitchCase="'btn3'">
     <h1>Eventos</h1>
@@ -21,9 +20,6 @@
     <h1>Enrutamiento</h1>
   </ng-container>
   <ng-container *ngSwitchCase="'btn5'">
-    <h1>Formularios</h1>
-  </ng-container>
-  <ng-container *ngSwitchCase="'btn6'">
     <h1>Acceso a Datos</h1>
   </ng-container>
 </div>
