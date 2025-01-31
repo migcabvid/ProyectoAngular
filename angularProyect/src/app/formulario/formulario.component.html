@@ -1,0 +1,45 @@
+<div class="form-container">
+    <h2>Formulario Reactivo en Angular</h2>
+  
+    <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
+      <!-- NOMBRE -->
+      <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input id="nombre" type="text" formControlName="nombre"
+          (focus)="onFocus('Nombre')" (mouseover)="onMouseOver('Nombre')" (mouseleave)="onMouseLeave()" />
+        <div class="error" *ngIf="nombre?.invalid && (nombre?.dirty || nombre?.touched)">
+          <small *ngIf="nombre?.errors?.['required']">⚠️ El nombre es obligatorio</small>
+          <small *ngIf="nombre?.errors?.['minlength']">⚠️ Mínimo 3 caracteres</small>
+        </div>
+      </div>
+  
+      <!-- EMAIL -->
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input id="email" type="email" formControlName="email"
+          (focus)="onFocus('Email')" (mouseover)="onMouseOver('Email')" (mouseleave)="onMouseLeave()" />
+        <div class="error" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+          <small *ngIf="email?.errors?.['required']">⚠️ El email es obligatorio</small>
+          <small *ngIf="email?.errors?.['email']">⚠️ Introduce un email válido</small>
+        </div>
+      </div>
+  
+      <!-- MENSAJE -->
+      <div class="form-group">
+        <label for="mensaje">Mensaje:</label>
+        <textarea id="mensaje" formControlName="mensaje"
+          (focus)="onFocus('Mensaje')" (mouseover)="onMouseOver('Mensaje')" (mouseleave)="onMouseLeave()"></textarea>
+        <div class="error" *ngIf="mensaje?.invalid && (mensaje?.dirty || mensaje?.touched)">
+          <small *ngIf="mensaje?.errors?.['required']">⚠️ El mensaje es obligatorio</small>
+          <small *ngIf="mensaje?.errors?.['maxlength']">⚠️ Máximo 200 caracteres</small>
+        </div>
+      </div>
+  
+      <!-- MENSAJE DE EVENTOS -->
+      <p class="event-msg">{{ hoveredField }}</p>
+  
+      <!-- BOTÓN DE ENVÍO -->
+      <button type="submit" [disabled]="formulario.invalid">Enviar</button>
+    </form>
+  </div>
+  
