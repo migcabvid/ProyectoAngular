@@ -28,6 +28,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     transition: 0.3s;
+    resize: none;
   }
   
   input:focus, textarea:focus {
