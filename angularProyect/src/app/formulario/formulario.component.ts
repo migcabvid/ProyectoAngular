@@ -1,4 +1,4 @@
-// Importaciones esenciales de Angular y módulos para formularios reactivos
+// Importaciones esenciales de Angular y modulos para formularios reactivos
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
@@ -12,11 +12,11 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 })
 export class FormularioComponent {
   formulario: FormGroup;         // Formulario reactivo con validaciones
-  hoveredField: string = '';      // Mensaje de interacción para el primer conjunto de campos
-  hoveredField2: string = '';     // Mensaje de interacción para el segundo conjunto de campos
+  hoveredField: string = '';      // Mensaje de interaccion para el primer conjunto de campos
+  hoveredField2: string = '';     // Mensaje de interaccion para el segundo conjunto de campos
 
   constructor(private fb: FormBuilder) {
-    // Configuración del formulario y sus validaciones
+    // Configuracion del formulario y sus validaciones
     this.formulario = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
@@ -49,7 +49,7 @@ export class FormularioComponent {
     }
   }
 
-  // Métodos para gestionar la interacción (focus y mouse) en los campos del formulario
+  // Metodos para gestionar la interaccion (focus y mouse) en los campos del formulario
   onFocus(field: string) { this.hoveredField = `Estás escribiendo en: ${field}`; }
   onMouseOver(field: string) { this.hoveredField = `Mouse sobre: ${field}`; }
   onMouseLeave() { this.hoveredField = ''; }
