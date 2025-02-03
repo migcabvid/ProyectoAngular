@@ -124,10 +124,13 @@
     <div class="botones">
       <button type="button" (click)="agregarDireccion()">Nueva Direccion</button>
       <button type="button" (click)="eliminarDireccion()" [disabled]="direcciones.length == 1">Eliminar ultima
-        direccion</button>
+        direccion</button>  
     </div>
 
+    <br>
+
     <div formArrayName="direcciones">
+      <label for="direccionDavid">Direccion/es:</label>
       <div *ngFor="let direccion of direcciones.controls; let i = index" class="direccion-container">
         <input [formControlName]="i" placeholder="Ingrese dirección">
       </div>
