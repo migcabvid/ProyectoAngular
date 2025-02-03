@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { DirectivasComponent } from "../directivas/directivas.component";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { FormularioComponent } from '../formulario/formulario.component';
 
 
 @Component({
   selector: 'app-header',
-  imports: [DirectivasComponent, CommonModule, FormsModule],
+  imports: [DirectivasComponent, CommonModule, FormsModule, FormularioComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })

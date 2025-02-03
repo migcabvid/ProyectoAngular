@@ -1,0 +1,140 @@
+<div class="form-container">
+  <h2>Formulario Reactivo en Angular Miguel Cantalejo</h2>
+
+  <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
+    <!-- NOMBRE -->
+    <div class="form-group">
+      <label for="nombre">Nombre:</label>
+      <input id="nombre" type="text" formControlName="nombre" (focus)="onFocus('Nombre')"
+        (mouseover)="onMouseOver('Nombre')" (mouseleave)="onMouseLeave()" />
+      <div class="error" *ngIf="nombre?.invalid">
+        <small *ngIf="nombre?.errors?.['required']">⚠️ El nombre es obligatorio</small>
+        <small *ngIf="nombre?.errors?.['minlength']">⚠️ Mínimo 3 caracteres</small>
+      </div>
+    </div>
+
+    <!-- EMAIL -->
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input id="email" type="email" formControlName="email" (focus)="onFocus('Email')"
+        (mouseover)="onMouseOver('Email')" (mouseleave)="onMouseLeave()" />
+      <div class="error" *ngIf="email?.invalid">
+        <small *ngIf="email?.errors?.['required']">⚠️ El email es obligatorio</small>
+        <small *ngIf="email?.errors?.['email']">⚠️ Introduce un email válido</small>
+      </div>
+    </div>
+
+    <!-- MENSAJE -->
+    <div class="form-group">
+      <label for="mensaje">Mensaje:</label>
+      <textarea id="mensaje" formControlName="mensaje" (focus)="onFocus('Mensaje')" (mouseover)="onMouseOver('Mensaje')"
+        (mouseleave)="onMouseLeave()"></textarea>
+      <div class="error" *ngIf="mensaje?.invalid">
+        <small *ngIf="mensaje?.errors?.['required']">⚠️ El mensaje es obligatorio</small>
+        <small *ngIf="mensaje?.errors?.['maxlength']">⚠️ Máximo 200 caracteres</small>
+      </div>
+    </div>
+
+    <!-- MENSAJE DE EVENTOS -->
+    <p class="event-msg">{{ hoveredField }}</p>
+
+    <!-- BOTÓN DE ENVÍO -->
+    <button type="submit" [disabled]="formulario.invalid">Enviar</button>
+  </form>
+</div>
+
+
+<br><br>
+
+
+<div class="form-container">
+  <h2>Formulario Reactivo en Angular Miguel Caballero</h2>
+
+  <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
+    <!-- FECHA DE NACIMIENTO -->
+    <div class="form-group">
+      <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+      <input id="fechaNacimiento" type="date" formControlName="fechaNacimiento"
+        (focus)="onFocus2('Fecha de Nacimiento')" (mouseover)="onMouseOver2('Fecha de Nacimiento')"
+        (mouseleave)="onMouseLeave2()" />
+      <div class="error" *ngIf="fechaNacimiento?.invalid">
+        <small *ngIf="fechaNacimiento?.errors?.['required']">⚠️ La fecha de nacimiento es obligatoria</small>
+      </div>
+    </div>
+
+    <!-- GENERO -->
+    <div class="form-group">
+      <label for="genero">Género:</label>
+      <select id="genero" formControlName="genero" (focus)="onFocus2('Género')" (mouseover)="onMouseOver2('Género')"
+        (mouseleave)="onMouseLeave2()">
+        <option value="" disabled selected>Selecciona un género</option>
+        <option value="masculino">Masculino</option>
+        <option value="femenino">Femenino</option>
+        <option value="otro">Otro</option>
+      </select>
+      <div class="error" *ngIf="genero?.invalid">
+        <small *ngIf="genero?.errors?.['required']">⚠️ El género es obligatorio</small>
+      </div>
+    </div>
+
+    <!-- AÑADIR MÁS INTERESES (checkboxes) -->
+    <div class="form-group" formGroupName="intereses">
+      <label for="intereses">Intereses:</label>
+      <div>
+        <label>
+          <input type="checkbox" formControlName="Angular" /> Angular
+        </label>
+        <label>
+          <input type="checkbox" formControlName="Quarkus" /> Quarkus
+        </label>
+        <label>
+          <input type="checkbox" formControlName="React" /> React
+        </label>
+      </div>
+      <div class="error" *ngIf="intereses?.invalid">
+        <small *ngIf="intereses?.errors?.['required']">⚠️ Selecciona al menos un interés</small>
+      </div>
+    </div>
+
+    <!-- MENSAJE DE EVENTOS -->
+    <p class="event-msg">{{ hoveredField2 }}</p>
+
+    <!-- BOTÓN DE ENVÍO -->
+    <button type="submit" [disabled]="formulario.invalid">Enviar</button>
+  </form>
+</div>
+
+<br>
+<br>
+
+<div class="form-container">
+  <h2>Formulario Reactivo en Angular David Galan</h2>
+  <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
+
+    <div class="form-group">
+      <label for="nombreDavid">Nombre:</label>
+      <input id="nombreDavid" type="text" formControlName="nombreDavid" (focus)="onFocus3('Nombre')"
+        (mouseover)="onMouseOver3('NombreDavid')" (mouseleave)="onMouseLeave3()" />
+      <div class="error" *ngIf="nombreDavid?.invalid">
+        <small *ngIf="nombreDavid?.errors?.['required']">⚠️ El nombre es obligatorio</small>
+        <small *ngIf="nombreDavid?.errors?.['minlength']">⚠️ Mínimo 3 caracteres</small>
+      </div>
+    </div>
+
+    <div class="botones">
+      <button type="button" (click)="agregarDireccion()">Nueva Direccion</button>
+      <button type="button" (click)="eliminarDireccion()" [disabled]="direcciones.length == 1">Eliminar ultima
+        direccion</button>
+    </div>
+
+    <div formArrayName="direcciones">
+      <div *ngFor="let direccion of direcciones.controls; let i = index" class="direccion-container">
+        <input [formControlName]="i" placeholder="Ingrese dirección">
+      </div>
+    </div>
+
+    <p class="event-msg">{{ hoveredField3 }}</p>
+
+    <button type="submit" [disabled]="formulario.invalid">Enviar</button>
+  </form>
+</div>
