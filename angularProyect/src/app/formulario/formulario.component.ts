@@ -24,24 +24,6 @@ export class FormularioComponent {
     direcciones: new FormArray([this.crearDireccion()])
   });
 
-  constructor(private fb: FormBuilder) {
-    // Configuracion del formulario y sus validaciones
-    this.formulario = this.fb.group({
-      nombre: ['', [Validators.required, Validators.minLength(3)]],
-      email: ['', [Validators.required, Validators.email]],
-      mensaje: ['', [Validators.required, Validators.maxLength(200)]],
-      fechaNacimiento: ['', Validators.required],
-      genero: ['', Validators.required],
-      intereses: this.fb.group({
-        Angular: [false],
-        Quarkus: [false],
-        React: [false]
-      }),
-      direcciones: this.fb.array([this.crearDireccion()]),
-      nombreDavid: ['', [Validators.required, Validators.minLength(3)]]
-    });
-  }
-
   // Getters para acceder a los controles del formulario desde la plantilla
   get nombre() { return this.formulario.get('nombre'); }
   get email() { return this.formulario.get('email'); }
@@ -50,6 +32,38 @@ export class FormularioComponent {
   get genero() { return this.formulario.get('genero'); }
   get intereses() { return this.formulario.get('intereses'); }
   get nombreDavid() { return this.formulario.get('nombreDavid'); }
+
+  // Configuracion del formulario y sus validaciones
+  // Con FormBuilder conseguimos simplificar la creacion de formularios reactivos
+  constructor(private formBuilder: FormBuilder) {
+
+    // Definir estructura del formulario
+    this.formulario = this.formBuilder.group({
+
+      // Formato: Valor inicial, [Validaciones]
+
+      // Formulario Miguel Cantalejo
+      nombre: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, Validators.email]],
+      mensaje: ['', [Validators.required, Validators.maxLength(200)]],
+
+      // Formulario Miguel Caballero
+      fechaNacimiento: ['', Validators.required],
+      genero: ['', Validators.required],
+
+      // Booleano, valor inicial --> false
+      intereses: this.formBuilder.group({
+        Angular: [false],
+        Quarkus: [false],
+        React: [false]
+      }),
+
+      // Formulario David Galan
+      // Creacion de un array de direcciones
+      direcciones: this.formBuilder.array([this.crearDireccion()]),
+      nombreDavid: ['', [Validators.required, Validators.minLength(3)]]
+    });
+  }
 
   // Metodo para enviar formularios
   enviarFormulario() {
@@ -71,18 +85,19 @@ export class FormularioComponent {
     return this.formularioDavid.get('direcciones') as FormArray;
   }
 
-  // Añadir una direccion
+  // Metodos llamados desde formulario.component.html
+
   agregarDireccion() {
     this.direcciones.push(this.crearDireccion());
   }
 
-  // Eliminar la ultima direccion
   eliminarDireccion() {
     if (this.direcciones.length > 1) {
       this.direcciones.removeAt(this.direcciones.length - 1);
     }
   }
 
+  // Movimiento de raton en los campos de los formularios, segun que formulario se muestra en uno u otro
   onFocus(field: string) { this.hoveredField = `Estás escribiendo en: ${field}`; }
   onMouseOver(field: string) { this.hoveredField = `Mouse sobre: ${field}`; }
   onMouseLeave() { this.hoveredField = ''; }
