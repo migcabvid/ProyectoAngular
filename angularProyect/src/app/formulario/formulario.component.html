@@ -1,5 +1,8 @@
+<!-- Formulario Miguel Cantalejo -->
+
 <div class="form-container">
   <h2>Formulario Reactivo en Angular Miguel Cantalejo</h2>
+
 
   <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
     <!-- NOMBRE -->
@@ -46,6 +49,7 @@
 
 <br><br>
 
+<!-- Formulario Miguel Caballero -->
 
 <div class="form-container">
   <h2>Formulario Reactivo en Angular Miguel Caballero</h2>
@@ -104,13 +108,15 @@
   </form>
 </div>
 
-<br>
-<br>
+<br><br>
+
+<!-- Formulario David Galan -->
 
 <div class="form-container">
   <h2>Formulario Reactivo en Angular David Galan</h2>
   <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
 
+    <!-- Nombre -->
     <div class="form-group">
       <label for="nombreDavid">Nombre:</label>
       <input id="nombreDavid" type="text" formControlName="nombreDavid" (focus)="onFocus3('Nombre')"
@@ -121,14 +127,7 @@
       </div>
     </div>
 
-    <div class="botones">
-      <button type="button" (click)="agregarDireccion()">Nueva Direccion</button>
-      <button type="button" (click)="eliminarDireccion()" [disabled]="direcciones.length == 1">Eliminar ultima
-        direccion</button>  
-    </div>
-
-    <br>
-
+    <!-- Direcciones -->
     <div formArrayName="direcciones">
       <label for="direccionDavid">Direccion/es:</label>
       <div *ngFor="let direccion of direcciones.controls; let i = index" class="direccion-container">
@@ -136,8 +135,19 @@
       </div>
     </div>
 
+    <br>
+
+    <!-- BOTÓN DE Agregar eliminar direccion -->
+    <div class="botones">
+      <button type="button" (click)="agregarDireccion()">Nueva Direccion</button>
+      <button type="button" (click)="eliminarDireccion()" [disabled]="direcciones.length == 1">Eliminar ultima
+        direccion</button>
+    </div>
+
+    <!-- MENSAJE DE EVENTOS -->
     <p class="event-msg">{{ hoveredField3 }}</p>
 
+    <!-- BOTÓN DE ENVÍO -->
     <button type="submit" [disabled]="formulario.invalid">Enviar</button>
   </form>
 </div>
