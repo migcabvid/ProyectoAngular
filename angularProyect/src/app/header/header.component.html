@@ -1,21 +1,5 @@
 <div>
-  <button (click)="mostrarContenido('btn1')">Directivas</button>
-  <button (click)="mostrarContenido('btn2')">Formulario</button>
-  <button (click)="mostrarContenido('btn3')">Eventos</button>
-  <button (click)="mostrarContenido('btn4')">Acceso a Datos</button>
-</div>
-
-<div [ngSwitch]="vistaActual">
-  <ng-container *ngSwitchCase="'btn1'">
-    <app-directivas></app-directivas>
-  </ng-container>
-  <ng-container *ngSwitchCase="'btn2'">
-    <app-formulario></app-formulario>
-  </ng-container>
-  <ng-container *ngSwitchCase="'btn3'">
-    <h1>Eventos</h1>
-  </ng-container>
-  <ng-container *ngSwitchCase="'btn4'">
-    <h1>Acceso a Datos</h1>
-  </ng-container>
+  <button routerLink="/directivas">Directivas</button>
+  <button routerLink="/formulario">Formulario</button>
+  <button routerLink="/datos">Acceso a Datos</button>
 </div>
