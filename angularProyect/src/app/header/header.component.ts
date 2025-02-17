@@ -1,20 +1,14 @@
 import { Component } from '@angular/core';
-import { DirectivasComponent } from "../directivas/directivas.component";
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { FormularioComponent } from '../formulario/formulario.component';
-
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
-  imports: [DirectivasComponent, CommonModule, FormsModule, FormularioComponent],
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  vistaActual: string = ' ';
-  mostrarContenido(txtBtn: string): void {
-    this.vistaActual = txtBtn;
-    console.log(txtBtn);
-  }
+  // Puedes eliminar la lógica de mostrarContenido si ya no es necesaria
 }
