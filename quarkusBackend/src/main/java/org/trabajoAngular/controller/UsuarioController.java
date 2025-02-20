@@ -6,7 +6,7 @@ import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import org.trabajoAngular.entities.Usuario;
 import org.trabajoAngular.service.UsuarioService;
 
-import jakarta.enterprise.inject.Produces;
+import jakarta.ws.rs.Produces;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;

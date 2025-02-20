@@ -32,10 +32,10 @@ public class UsuarioService {
     public void actualizarUsuario(Long id, Usuario usuario) {
         Usuario usuarioExistente = usuarioRepository.findById(id);
         if (usuarioExistente != null) {
-            usuarioExistente.nombre = usuario.nombre;
-            usuarioExistente.apellidos = usuario.apellidos;
-            usuarioExistente.correo = usuario.correo;
-            usuarioExistente.contraseña = usuario.contraseña;
+            usuarioExistente.setNombre(usuario.getNombre());
+            usuarioExistente.setApellidos(usuario.getApellidos());
+            usuarioExistente.setCorreo(usuario.getCorreo());
+            usuarioExistente.setContraseña(usuario.getContraseña());
         }
     }
 
