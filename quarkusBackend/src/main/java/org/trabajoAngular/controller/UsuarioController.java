@@ -43,7 +43,7 @@ public class UsuarioController {
     @POST
     public Response crearUsuario(Usuario usuario) {
         usuarioService.crearUsuario(usuario);
-        return Response.status(Response.Status.CREATED).build();
+        return Response.status(Response.Status.CREATED).entity(usuario).build();
     }
 
     @PUT
@@ -54,15 +54,19 @@ public class UsuarioController {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
         usuarioService.actualizarUsuario(id, usuario);
-        return Response.ok().build();
+        return Response.ok().entity(usuarioExistente).build();
     }
 
     @DELETE
     @Path("/{id}")
     public Response eliminarUsuario(@PathParam("id") Long id) {
         if (!usuarioService.eliminarUsuario(id)) {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("No se encontró el usuario con el id " + id)
+                    .build();
         }
-        return Response.noContent().build();
+        String mensaje = "El usuario ha sido eliminado con el id " + id;
+        return Response.ok(mensaje).build();
     }
+
 }

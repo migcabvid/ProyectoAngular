@@ -59,11 +59,11 @@ public class Usuario {
         this.correo = correo;
     }
 
-    public String getContraseña() {
+    public String getContrasena() {
         return contrasena;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contrasena = contraseña;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 }

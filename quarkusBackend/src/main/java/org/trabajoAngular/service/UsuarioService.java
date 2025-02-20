@@ -35,7 +35,7 @@ public class UsuarioService {
             usuarioExistente.setNombre(usuario.getNombre());
             usuarioExistente.setApellidos(usuario.getApellidos());
             usuarioExistente.setCorreo(usuario.getCorreo());
-            usuarioExistente.setContraseña(usuario.getContraseña());
+            usuarioExistente.setContrasena(usuario.getContrasena());
         }
     }
 
