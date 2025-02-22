@@ -1,0 +1,86 @@
+.container {
+    max-width: 800px;
+    margin: 20px auto; /* Centra el contenedor horizontalmente */
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .button-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: center; /* Centra los botones */
+  }
+  
+  .button-group button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #6c757d; /* Gris medio */
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .button-group button.active {
+    background-color: #495057; /* Gris oscuro */
+  }
+  
+  .forms-container {
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra el contenido de los formularios */
+  }
+  
+  .form-section {
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 400px; /* Limita el ancho de cada sección */
+  }
+  
+  .form-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .form-section label {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+  }
+  
+  .form-section input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .form-section button {
+    width: 150px;
+    padding: 10px;
+    border: none;
+    background-color: #28a745; /* Verde */
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .form-section button:disabled {
+    background-color: #adb5bd; /* Gris claro para deshabilitado */
+    cursor: not-allowed;
+  }
+  
+  pre {
+    background: #f4f4f4;
+    padding: 10px;
+    border-radius: 4px;
+    width: 100%;
+    overflow-x: auto;
+  }
+  

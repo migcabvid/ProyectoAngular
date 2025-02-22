@@ -1,1 +1,84 @@
-<p>datos works!</p>
+<div class="container">
+    <!-- Botones para seleccionar la entidad -->
+    <div class="button-group">
+        <button (click)="selectEntity('usuario')" [class.active]="selectedEntity==='usuario'">Usuario</button>
+        <button (click)="selectEntity('profesor')" [class.active]="selectedEntity==='profesor'">Profesor</button>
+        <button (click)="selectEntity('alumno')" [class.active]="selectedEntity==='alumno'">Alumno</button>
+    </div>
+
+    <!-- Se muestran los formularios cuando se selecciona una entidad -->
+    <div *ngIf="selectedEntity" class="forms-container">
+        <h2>Gestionar {{ selectedEntity | titlecase }}</h2>
+
+        <!-- Listar -->
+        <div class="form-section">
+            <h3>Listar todos</h3>
+            <button (click)="listar()">Listar</button>
+            <pre *ngIf="listarResult">{{ listarResult | json }}</pre>
+        </div>
+
+        <!-- Crear -->
+        <div class="form-section">
+            <h3>Crear {{ selectedEntity | titlecase }}</h3>
+            <form [formGroup]="createForm" (ngSubmit)="create()">
+                <label>
+                    Nombre:
+                    <input type="text" formControlName="nombre">
+                </label>
+                <label>
+                    Apellidos:
+                    <input type="text" formControlName="apellidos">
+                </label>
+                <label>
+                    Correo:
+                    <input type="email" formControlName="correo">
+                </label>
+                <label>
+                    Contraseña:
+                    <input type="password" formControlName="contrasena">
+                </label>
+                <button type="submit" [disabled]="createForm.invalid">Crear</button>
+            </form>
+        </div>
+
+        <!-- Actualizar -->
+        <div class="form-section">
+            <h3>Actualizar {{ selectedEntity | titlecase }}</h3>
+            <form [formGroup]="updateForm" (ngSubmit)="update()">
+                <label>
+                    ID:
+                    <input type="text" formControlName="id">
+                </label>
+                <label>
+                    Nombre:
+                    <input type="text" formControlName="nombre">
+                </label>
+                <label>
+                    Apellidos:
+                    <input type="text" formControlName="apellidos">
+                </label>
+                <label>
+                    Correo:
+                    <input type="email" formControlName="correo">
+                </label>
+                <label>
+                    Contraseña:
+                    <input type="password" formControlName="contrasena">
+                </label>
+                <button type="submit" [disabled]="updateForm.invalid">Actualizar</button>
+            </form>
+        </div>
+
+        <!-- Eliminar -->
+        <div class="form-section">
+            <h3>Eliminar {{ selectedEntity | titlecase }}</h3>
+            <form [formGroup]="deleteForm" (ngSubmit)="delete()">
+                <label>
+                    ID:
+                    <input type="text" formControlName="id">
+                </label>
+                <button type="submit" [disabled]="deleteForm.invalid">Eliminar</button>
+            </form>
+        </div>
+    </div>
+</div>
