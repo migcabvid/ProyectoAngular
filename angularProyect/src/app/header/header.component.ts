@@ -10,5 +10,5 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  // Puedes eliminar la lógica de mostrarContenido si ya no es necesaria
+  
 }

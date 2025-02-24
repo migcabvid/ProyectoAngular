@@ -68,10 +68,10 @@ export class FormularioComponent {
   // Metodo para enviar formularios
   enviarFormulario() {
     if (this.formulario.valid) {
-      alert('Formulario enviado correctamente ✅');
+      alert('Formulario enviado correctamente');
       console.log(this.formulario.value);
     } else {
-      alert('❌ Corrige los errores antes de enviar.');
+      alert('Corrige los errores antes de enviar.');
     }
   }
 
