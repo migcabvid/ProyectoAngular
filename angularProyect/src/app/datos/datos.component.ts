@@ -11,7 +11,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
   styleUrls: ['./datos.component.css']
 })
 export class DatosComponent {
-  selectedEntity: 'usuario' | 'profesor' | 'coche' | null = null;
+  selectedEntity: 'usuario' | 'profesor' | 'coche' | 'taller' | null = null;
   listarResult: any;
 
   // Formularios para Usuario
@@ -23,6 +23,11 @@ export class DatosComponent {
   cocheCreateForm: FormGroup;
   cocheUpdateForm: FormGroup;
   cocheDeleteForm: FormGroup;
+
+  // Formularios para Taller
+  tallerCreateForm: FormGroup;
+  tallerUpdateForm: FormGroup;
+  tallerDeleteForm: FormGroup;
 
   constructor(private fb: FormBuilder, private http: HttpClient) {
     // ======================= FORMULARIOS PARA USUARIO =======================
@@ -66,10 +71,33 @@ export class DatosComponent {
     this.cocheDeleteForm = this.fb.group({
       id: ['', Validators.required]
     });
+
+
+    // ======================= FORMULARIOS PARA TALLER =======================
+    this.tallerCreateForm = this.fb.group({
+      nombre: ['', Validators.required],
+      direccion: ['', Validators.required],
+      telefono: ['', [Validators.required, Validators.maxLength(15)]],
+      capacidad: [1, [Validators.required, Validators.min(1)]],
+      horario: ['', Validators.required]
+    });
+
+    this.tallerUpdateForm = this.fb.group({
+      id: ['', Validators.required],
+      nombre: ['', Validators.required],
+      direccion: ['', Validators.required],
+      telefono: ['', [Validators.required, Validators.maxLength(15)]],
+      capacidad: [1, [Validators.required, Validators.min(1)]],
+      horario: ['', Validators.required]
+    });
+
+    this.tallerDeleteForm = this.fb.group({
+      id: ['', Validators.required]
+    });
   }
 
   // ======================= SELECCIÓN DE ENTIDAD =======================
-  selectEntity(entity: 'usuario' | 'profesor' | 'coche') {
+  selectEntity(entity: 'usuario' | 'profesor' | 'coche' | 'taller') {
     this.selectedEntity = entity;
     this.listarResult = null;
   }
@@ -211,4 +239,64 @@ export class DatosComponent {
       );
     }
   }
+
+  // ======================= CRUD PARA TALLER =======================
+
+  // Crear un nuevo taller
+  createTaller() {
+    if (this.crudUrl && this.tallerCreateForm.valid) {
+      this.http.post(this.crudUrl, this.tallerCreateForm.value).subscribe(
+        data => {
+          console.log('Taller creado:', data);
+          alert('Taller creado exitosamente: ' + JSON.stringify(data));
+          this.tallerCreateForm.reset();
+        },
+        error => {
+          console.error('Error al crear taller:', error);
+          alert('Error al crear taller: ' + JSON.stringify(error));
+        }
+      );
+    }
+  }
+
+  // Actualizar un taller
+  updateTaller() {
+    if (this.crudUrl && this.tallerUpdateForm.valid) {
+      const updateUrl = `${this.crudUrl}/${this.tallerUpdateForm.value.id}`;
+      this.http.put(updateUrl, this.tallerUpdateForm.value).subscribe(
+        data => {
+          console.log('Taller actualizado:', data);
+          alert('Taller actualizado exitosamente: ' + JSON.stringify(data));
+          this.tallerUpdateForm.reset();
+        },
+        error => {
+          console.error('Error al actualizar taller:', error);
+          alert('Error al actualizar taller: ' + JSON.stringify(error));
+        }
+      );
+    }
+  }
+
+  // Eliminar un taller por ID
+  deleteTaller() {
+    const id = this.tallerDeleteForm.value.id;
+    if (this.crudUrl && id) {
+      this.http.delete(`${this.crudUrl}/${id}`, { responseType: 'text' }).subscribe(
+        data => {
+          console.log('Taller eliminado:', data);
+          alert('Taller eliminado exitosamente: ' + data);
+          this.tallerDeleteForm.reset();
+        },
+        error => {
+          console.error('Error al eliminar taller:', error);
+          alert('Error al eliminar taller: ' + (typeof error.error === 'string' ? error.error : JSON.stringify(error.error)));
+        }
+      );
+    }
+  }
+
+
+
+
+
 }
