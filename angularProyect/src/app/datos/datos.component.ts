@@ -170,17 +170,18 @@ export class DatosComponent {
   deleteUsuario() {
     const id = this.usuarioDeleteForm.value.id;
     if (this.crudUrl && id) {
-      this.http.delete(`${this.crudUrl}/${id}`, { responseType: 'text' }).subscribe(
-        data => {
+      this.http.delete(`${this.crudUrl}/${id}`, { responseType: 'text' }).subscribe({
+        next: data => {
           console.log('Usuario eliminado:', data);
           alert('Usuario eliminado exitosamente: ' + data);
           this.usuarioDeleteForm.reset();
         },
-        error => {
+        error: error => {
           console.error('Error al eliminar usuario:', error);
           alert('Error al eliminar usuario: ' + (typeof error.error === 'string' ? error.error : JSON.stringify(error.error)));
         }
-      );
+      });
+
     }
   }
 
