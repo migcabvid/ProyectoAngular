@@ -2,11 +2,11 @@
     <!-- Botones para seleccionar la entidad -->
     <div class="button-group">
         <button (click)="selectEntity('usuario')" [class.active]="selectedEntity==='usuario'">Usuario</button>
-        <button (click)="selectEntity('profesor')" [class.active]="selectedEntity==='profesor'">Profesor</button>
-        <button (click)="selectEntity('alumno')" [class.active]="selectedEntity==='alumno'">Alumno</button>
+        <button (click)="selectEntity('taller')" [class.active]="selectedEntity==='taller'">Taller</button>
+        <button (click)="selectEntity('coche')" [class.active]="selectedEntity==='coche'">Coche</button>
     </div>
 
-    <!-- Se muestran los formularios cuando se selecciona una entidad -->
+    <!-- Se muestra la sección solo si hay una entidad seleccionada -->
     <div *ngIf="selectedEntity" class="forms-container">
         <h2>Gestionar {{ selectedEntity | titlecase }}</h2>
 
@@ -17,68 +17,117 @@
             <pre *ngIf="listarResult">{{ listarResult | json }}</pre>
         </div>
 
-        <!-- Crear -->
-        <div class="form-section">
-            <h3>Crear {{ selectedEntity | titlecase }}</h3>
-            <form [formGroup]="createForm" (ngSubmit)="create()">
-                <label>
-                    Nombre:
-                    <input type="text" formControlName="nombre">
-                </label>
-                <label>
-                    Apellidos:
-                    <input type="text" formControlName="apellidos">
-                </label>
-                <label>
-                    Correo:
-                    <input type="email" formControlName="correo">
-                </label>
-                <label>
-                    Contraseña:
-                    <input type="password" formControlName="contrasena">
-                </label>
-                <button type="submit" [disabled]="createForm.invalid">Crear</button>
-            </form>
-        </div>
+        <!-- ======================= FORMULARIOS PARA USUARIO ======================= -->
+        <ng-container *ngIf="selectedEntity === 'usuario'">
+            <!-- Crear Usuario -->
+            <div class="form-section">
+                <h3>Crear Usuario</h3>
+                <form [formGroup]="usuarioCreateForm" (ngSubmit)="createUsuario()">
+                    <label>Nombre: <input type="text" formControlName="nombre"></label>
+                    <label>Apellidos: <input type="text" formControlName="apellidos"></label>
+                    <label>Correo: <input type="email" formControlName="correo"></label>
+                    <label>Contraseña: <input type="password" formControlName="contrasena"></label>
+                    <button type="submit" [disabled]="usuarioCreateForm.invalid">Crear</button>
+                </form>
+            </div>
 
-        <!-- Actualizar -->
-        <div class="form-section">
-            <h3>Actualizar {{ selectedEntity | titlecase }}</h3>
-            <form [formGroup]="updateForm" (ngSubmit)="update()">
-                <label>
-                    ID:
-                    <input type="text" formControlName="id">
-                </label>
-                <label>
-                    Nombre:
-                    <input type="text" formControlName="nombre">
-                </label>
-                <label>
-                    Apellidos:
-                    <input type="text" formControlName="apellidos">
-                </label>
-                <label>
-                    Correo:
-                    <input type="email" formControlName="correo">
-                </label>
-                <label>
-                    Contraseña:
-                    <input type="password" formControlName="contrasena">
-                </label>
-                <button type="submit" [disabled]="updateForm.invalid">Actualizar</button>
-            </form>
-        </div>
+            <!-- Actualizar Usuario -->
+            <div class="form-section">
+                <h3>Actualizar Usuario</h3>
+                <form [formGroup]="usuarioUpdateForm" (ngSubmit)="updateUsuario()">
+                    <label>ID: <input type="text" formControlName="id"></label>
+                    <label>Nombre: <input type="text" formControlName="nombre"></label>
+                    <label>Apellidos: <input type="text" formControlName="apellidos"></label>
+                    <label>Correo: <input type="email" formControlName="correo"></label>
+                    <label>Contraseña: <input type="password" formControlName="contrasena"></label>
+                    <button type="submit" [disabled]="usuarioUpdateForm.invalid">Actualizar</button>
+                </form>
+            </div>
 
-        <!-- Eliminar -->
-        <div class="form-section">
-            <h3>Eliminar {{ selectedEntity | titlecase }}</h3>
-            <form [formGroup]="deleteForm" (ngSubmit)="delete()">
-                <label>
-                    ID:
-                    <input type="text" formControlName="id">
-                </label>
-                <button type="submit" [disabled]="deleteForm.invalid">Eliminar</button>
-            </form>
-        </div>
+            <!-- Eliminar Usuario -->
+            <div class="form-section">
+                <h3>Eliminar Usuario</h3>
+                <form [formGroup]="usuarioDeleteForm" (ngSubmit)="deleteUsuario()">
+                    <label>ID: <input type="text" formControlName="id"></label>
+                    <button type="submit" [disabled]="usuarioDeleteForm.invalid">Eliminar</button>
+                </form>
+            </div>
+        </ng-container>
+
+        <!-- ======================= FORMULARIOS PARA COCHE ======================= -->
+        <ng-container *ngIf="selectedEntity === 'coche'">
+            <!-- Crear Coche -->
+            <div class="form-section">
+                <h3>Crear Coche</h3>
+                <form [formGroup]="cocheCreateForm" (ngSubmit)="createCoche()">
+                    <label>Marca: <input type="text" formControlName="marca"></label>
+                    <label>Modelo: <input type="text" formControlName="modelo"></label>
+                    <label>Matrícula: <input type="text" formControlName="matricula"></label>
+                    <label>Color: <input type="text" formControlName="color"></label>
+                    <label>Precio: <input type="number" formControlName="precio" min="0"></label>
+                    <button type="submit" [disabled]="cocheCreateForm.invalid">Crear</button>
+                </form>
+            </div>
+
+            <!-- Actualizar Coche -->
+            <div class="form-section">
+                <h3>Actualizar Coche</h3>
+                <form [formGroup]="cocheUpdateForm" (ngSubmit)="updateCoche()">
+                    <label>ID: <input type="text" formControlName="id"></label>
+                    <label>Marca: <input type="text" formControlName="marca"></label>
+                    <label>Modelo: <input type="text" formControlName="modelo"></label>
+                    <label>Matrícula: <input type="text" formControlName="matricula"></label>
+                    <label>Color: <input type="text" formControlName="color"></label>
+                    <label>Precio: <input type="number" formControlName="precio" min="0"></label>
+                    <button type="submit" [disabled]="cocheUpdateForm.invalid">Actualizar</button>
+                </form>
+            </div>
+
+            <!-- Eliminar Coche -->
+            <div class="form-section">
+                <h3>Eliminar Coche</h3>
+                <form [formGroup]="cocheDeleteForm" (ngSubmit)="deleteCoche()">
+                    <label>ID: <input type="text" formControlName="id"></label>
+                    <button type="submit" [disabled]="cocheDeleteForm.invalid">Eliminar</button>
+                </form>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="selectedEntity === 'taller'">
+            <!-- Crear Taller -->
+            <div class="form-section">
+                <h3>Crear Taller</h3>
+                <form [formGroup]="tallerCreateForm" (ngSubmit)="createTaller()">
+                    <label>Nombre: <input type="text" formControlName="nombre"></label>
+                    <label>Dirección: <input type="text" formControlName="direccion"></label>
+                    <label>Teléfono: <input type="text" formControlName="telefono"></label>
+                    <label>Capacidad: <input type="number" formControlName="capacidad" min="1"></label>
+                    <label>Horario: <input type="text" formControlName="horario"></label>
+                    <button type="submit" [disabled]="tallerCreateForm.invalid">Crear</button>
+                </form>
+            </div>
+    
+            <!-- Actualizar Taller -->
+            <div class="form-section">
+                <h3>Actualizar Taller</h3>
+                <form [formGroup]="tallerUpdateForm" (ngSubmit)="updateTaller()">
+                    <label>ID: <input type="text" formControlName="id"></label>
+                    <label>Nombre: <input type="text" formControlName="nombre"></label>
+                    <label>Dirección: <input type="text" formControlName="direccion"></label>
+                    <label>Teléfono: <input type="text" formControlName="telefono"></label>
+                    <label>Capacidad: <input type="number" formControlName="capacidad" min="1"></label>
+                    <label>Horario: <input type="text" formControlName="horario"></label>
+                    <button type="submit" [disabled]="tallerUpdateForm.invalid">Actualizar</button>
+                </form>
+            </div>
+    
+            <!-- Eliminar Taller -->
+            <div class="form-section">
+                <h3>Eliminar Taller</h3>
+                <form [formGroup]="tallerDeleteForm" (ngSubmit)="deleteTaller()">
+                    <label>ID: <input type="text" formControlName="id"></label>
+                    <button type="submit" [disabled]="tallerDeleteForm.invalid">Eliminar</button>
+                </form>
+            </div>
+        </ng-container>
     </div>
 </div>
