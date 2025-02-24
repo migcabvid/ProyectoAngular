@@ -92,5 +92,42 @@
                 </form>
             </div>
         </ng-container>
+        <ng-container *ngIf="selectedEntity === 'taller'">
+            <!-- Crear Taller -->
+            <div class="form-section">
+                <h3>Crear Taller</h3>
+                <form [formGroup]="tallerCreateForm" (ngSubmit)="createTaller()">
+                    <label>Nombre: <input type="text" formControlName="nombre"></label>
+                    <label>Dirección: <input type="text" formControlName="direccion"></label>
+                    <label>Teléfono: <input type="text" formControlName="telefono"></label>
+                    <label>Capacidad: <input type="number" formControlName="capacidad" min="1"></label>
+                    <label>Horario: <input type="text" formControlName="horario"></label>
+                    <button type="submit" [disabled]="tallerCreateForm.invalid">Crear</button>
+                </form>
+            </div>
+    
+            <!-- Actualizar Taller -->
+            <div class="form-section">
+                <h3>Actualizar Taller</h3>
+                <form [formGroup]="tallerUpdateForm" (ngSubmit)="updateTaller()">
+                    <label>ID: <input type="text" formControlName="id"></label>
+                    <label>Nombre: <input type="text" formControlName="nombre"></label>
+                    <label>Dirección: <input type="text" formControlName="direccion"></label>
+                    <label>Teléfono: <input type="text" formControlName="telefono"></label>
+                    <label>Capacidad: <input type="number" formControlName="capacidad" min="1"></label>
+                    <label>Horario: <input type="text" formControlName="horario"></label>
+                    <button type="submit" [disabled]="tallerUpdateForm.invalid">Actualizar</button>
+                </form>
+            </div>
+    
+            <!-- Eliminar Taller -->
+            <div class="form-section">
+                <h3>Eliminar Taller</h3>
+                <form [formGroup]="tallerDeleteForm" (ngSubmit)="deleteTaller()">
+                    <label>ID: <input type="text" formControlName="id"></label>
+                    <button type="submit" [disabled]="tallerDeleteForm.invalid">Eliminar</button>
+                </form>
+            </div>
+        </ng-container>
     </div>
 </div>
