@@ -11,26 +11,28 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
   styleUrls: ['./datos.component.css']
 })
 export class DatosComponent {
+  // Entidad seleccionada (usuario, profesor, coche o taller). Inicialmente, ninguna.
   selectedEntity: 'usuario' | 'profesor' | 'coche' | 'taller' | null = null;
+  // Variable para almacenar la respuesta del listado
   listarResult: any;
 
-  // Formularios para Usuario
+  // ===================== Formularios para USUARIO =====================
   usuarioCreateForm: FormGroup;
   usuarioUpdateForm: FormGroup;
   usuarioDeleteForm: FormGroup;
 
-  // Formularios para Coche
+  // ===================== Formularios para COCHE =====================
   cocheCreateForm: FormGroup;
   cocheUpdateForm: FormGroup;
   cocheDeleteForm: FormGroup;
 
-  // Formularios para Taller
+  // ===================== Formularios para TALLER =====================
   tallerCreateForm: FormGroup;
   tallerUpdateForm: FormGroup;
   tallerDeleteForm: FormGroup;
 
   constructor(private fb: FormBuilder, private http: HttpClient) {
-    // ======================= FORMULARIOS PARA USUARIO =======================
+    // ----------------- Formulario para crear USUARIO -----------------
     this.usuarioCreateForm = this.fb.group({
       nombre: ['', Validators.required],
       apellidos: ['', Validators.required],
@@ -38,6 +40,7 @@ export class DatosComponent {
       contrasena: ['', Validators.required]
     });
 
+    // ----------------- Formulario para actualizar USUARIO -----------------
     this.usuarioUpdateForm = this.fb.group({
       id: ['', Validators.required],
       nombre: ['', Validators.required],
@@ -46,11 +49,12 @@ export class DatosComponent {
       contrasena: ['', Validators.required]
     });
 
+    // ----------------- Formulario para eliminar USUARIO -----------------
     this.usuarioDeleteForm = this.fb.group({
       id: ['', Validators.required]
     });
 
-    // ======================= FORMULARIOS PARA COCHE =======================
+    // ----------------- Formulario para crear COCHE -----------------
     this.cocheCreateForm = this.fb.group({
       marca: ['', Validators.required],
       modelo: ['', Validators.required],
@@ -59,6 +63,7 @@ export class DatosComponent {
       precio: ['', [Validators.required, Validators.min(0)]]
     });
 
+    // ----------------- Formulario para actualizar COCHE -----------------
     this.cocheUpdateForm = this.fb.group({
       id: ['', Validators.required],
       marca: ['', Validators.required],
@@ -68,12 +73,12 @@ export class DatosComponent {
       precio: ['', [Validators.required, Validators.min(0)]]
     });
 
+    // ----------------- Formulario para eliminar COCHE -----------------
     this.cocheDeleteForm = this.fb.group({
       id: ['', Validators.required]
     });
 
-
-    // ======================= FORMULARIOS PARA TALLER =======================
+    // ----------------- Formulario para crear TALLER -----------------
     this.tallerCreateForm = this.fb.group({
       nombre: ['', Validators.required],
       direccion: ['', Validators.required],
@@ -82,6 +87,7 @@ export class DatosComponent {
       horario: ['', Validators.required]
     });
 
+    // ----------------- Formulario para actualizar TALLER -----------------
     this.tallerUpdateForm = this.fb.group({
       id: ['', Validators.required],
       nombre: ['', Validators.required],
@@ -91,34 +97,37 @@ export class DatosComponent {
       horario: ['', Validators.required]
     });
 
+    // ----------------- Formulario para eliminar TALLER -----------------
     this.tallerDeleteForm = this.fb.group({
       id: ['', Validators.required]
     });
   }
 
-  // ======================= SELECCIÓN DE ENTIDAD =======================
+  // ----------------- Seleccionar la entidad que se va a gestionar -----------------
   selectEntity(entity: 'usuario' | 'profesor' | 'coche' | 'taller') {
-    this.selectedEntity = entity;
-    this.listarResult = null;
+    this.selectedEntity = entity; // Se asigna la entidad seleccionada
+    this.listarResult = null;     // Se reinicia el resultado del listado
   }
 
-  // Obtiene la URL base según la entidad seleccionada
+  // Devuelve la URL base para las operaciones CRUD según la entidad seleccionada.
   get crudUrl(): string {
     if (!this.selectedEntity) return '';
-    return `http://localhost:8080/${this.selectedEntity}s`; // Pluraliza la entidad
+    // Se asume que la API pluraliza la entidad añadiendo una 's'
+    return `http://localhost:8080/${this.selectedEntity}s`;
   }
 
-  // Obtiene la URL para listar registros
+  // URL para listar registros (igual que crudUrl en este caso).
   get getAllUrl(): string {
     return this.crudUrl;
   }
 
-  // ======================= LISTAR REGISTROS =======================
+  // ----------------- Método para listar registros del backend -----------------
   listar() {
     if (this.getAllUrl) {
+      // Se realiza una petición GET a la URL definida
       this.http.get(this.getAllUrl).subscribe(
         data => {
-          this.listarResult = data;
+          this.listarResult = data;  // Se guardan los datos recibidos
           console.log('Listar:', data);
           alert('Respuesta del backend: ' + JSON.stringify(data));
         },
@@ -129,16 +138,17 @@ export class DatosComponent {
     }
   }
 
-  // ======================= CRUD PARA USUARIO =======================
+  // ===================== CRUD PARA USUARIO =====================
 
-  // Crear un nuevo usuario
+  // Crea un nuevo usuario mediante petición POST.
   createUsuario() {
     if (this.crudUrl && this.usuarioCreateForm.valid) {
+      // Se envían los datos del formulario al backend.
       this.http.post(this.crudUrl, this.usuarioCreateForm.value).subscribe(
         data => {
           console.log('Usuario creado:', data);
           alert('Usuario creado exitosamente: ' + JSON.stringify(data));
-          this.usuarioCreateForm.reset();
+          this.usuarioCreateForm.reset(); // Se limpia el formulario tras la creación
         },
         error => {
           console.error('Error al crear usuario:', error);
@@ -148,15 +158,16 @@ export class DatosComponent {
     }
   }
 
-  // Actualizar un usuario
+  // Actualiza un usuario existente mediante petición PUT.
   updateUsuario() {
     if (this.crudUrl && this.usuarioUpdateForm.valid) {
+      // Construye la URL para la actualización usando el ID del usuario.
       const updateUrl = `${this.crudUrl}/${this.usuarioUpdateForm.value.id}`;
       this.http.put(updateUrl, this.usuarioUpdateForm.value).subscribe(
         data => {
           console.log('Usuario actualizado:', data);
           alert('Usuario actualizado exitosamente: ' + JSON.stringify(data));
-          this.usuarioUpdateForm.reset();
+          this.usuarioUpdateForm.reset(); // Se limpia el formulario tras la actualización
         },
         error => {
           console.error('Error al actualizar usuario:', error);
@@ -166,35 +177,36 @@ export class DatosComponent {
     }
   }
 
-  // Eliminar un usuario por ID
+  // Elimina un usuario mediante petición DELETE.
   deleteUsuario() {
     const id = this.usuarioDeleteForm.value.id;
     if (this.crudUrl && id) {
+      // Se construye la URL con el ID y se realiza la petición DELETE
       this.http.delete(`${this.crudUrl}/${id}`, { responseType: 'text' }).subscribe({
         next: data => {
           console.log('Usuario eliminado:', data);
           alert('Usuario eliminado exitosamente: ' + data);
-          this.usuarioDeleteForm.reset();
+          this.usuarioDeleteForm.reset(); // Se limpia el formulario tras la eliminación
         },
         error: error => {
           console.error('Error al eliminar usuario:', error);
           alert('Error al eliminar usuario: ' + (typeof error.error === 'string' ? error.error : JSON.stringify(error.error)));
         }
       });
-
     }
   }
 
-  // ======================= CRUD PARA COCHE =======================
+  // ===================== CRUD PARA COCHE =====================
 
-  // Crear un nuevo coche
+  // Crea un nuevo coche mediante petición POST.
   createCoche() {
     if (this.crudUrl && this.cocheCreateForm.valid) {
+      // Se envían los datos del formulario de coche al backend.
       this.http.post(this.crudUrl, this.cocheCreateForm.value).subscribe(
         data => {
           console.log('Coche creado:', data);
           alert('Coche creado exitosamente: ' + JSON.stringify(data));
-          this.cocheCreateForm.reset();
+          this.cocheCreateForm.reset(); // Se reinicia el formulario
         },
         error => {
           console.error('Error al crear coche:', error);
@@ -204,15 +216,16 @@ export class DatosComponent {
     }
   }
 
-  // Actualizar un coche
+  // Actualiza un coche existente mediante petición PUT.
   updateCoche() {
     if (this.crudUrl && this.cocheUpdateForm.valid) {
+      // Se construye la URL de actualización con el ID del coche.
       const updateUrl = `${this.crudUrl}/${this.cocheUpdateForm.value.id}`;
       this.http.put(updateUrl, this.cocheUpdateForm.value).subscribe(
         data => {
           console.log('Coche actualizado:', data);
           alert('Coche actualizado exitosamente: ' + JSON.stringify(data));
-          this.cocheUpdateForm.reset();
+          this.cocheUpdateForm.reset(); // Se limpia el formulario
         },
         error => {
           console.error('Error al actualizar coche:', error);
@@ -222,15 +235,16 @@ export class DatosComponent {
     }
   }
 
-  // Eliminar un coche por ID
+  // Elimina un coche mediante petición DELETE.
   deleteCoche() {
     const id = this.cocheDeleteForm.value.id;
     if (this.crudUrl && id) {
+      // Se realiza la petición DELETE a la URL construida con el ID del coche.
       this.http.delete(`${this.crudUrl}/${id}`, { responseType: 'text' }).subscribe(
         data => {
           console.log('Coche eliminado:', data);
           alert('Coche eliminado exitosamente: ' + data);
-          this.cocheDeleteForm.reset();
+          this.cocheDeleteForm.reset(); // Se limpia el formulario tras la eliminación
         },
         error => {
           console.error('Error al eliminar coche:', error);
@@ -240,16 +254,17 @@ export class DatosComponent {
     }
   }
 
-  // ======================= CRUD PARA TALLER =======================
+  // ===================== CRUD PARA TALLER =====================
 
-  // Crear un nuevo taller
+  // Crea un nuevo taller mediante petición POST.
   createTaller() {
     if (this.crudUrl && this.tallerCreateForm.valid) {
+      // Se envían los datos del formulario de taller al backend.
       this.http.post(this.crudUrl, this.tallerCreateForm.value).subscribe(
         data => {
           console.log('Taller creado:', data);
           alert('Taller creado exitosamente: ' + JSON.stringify(data));
-          this.tallerCreateForm.reset();
+          this.tallerCreateForm.reset(); // Se limpia el formulario
         },
         error => {
           console.error('Error al crear taller:', error);
@@ -259,15 +274,16 @@ export class DatosComponent {
     }
   }
 
-  // Actualizar un taller
+  // Actualiza un taller existente mediante petición PUT.
   updateTaller() {
     if (this.crudUrl && this.tallerUpdateForm.valid) {
+      // Se construye la URL para actualizar el taller usando su ID.
       const updateUrl = `${this.crudUrl}/${this.tallerUpdateForm.value.id}`;
       this.http.put(updateUrl, this.tallerUpdateForm.value).subscribe(
         data => {
           console.log('Taller actualizado:', data);
           alert('Taller actualizado exitosamente: ' + JSON.stringify(data));
-          this.tallerUpdateForm.reset();
+          this.tallerUpdateForm.reset(); // Se limpia el formulario
         },
         error => {
           console.error('Error al actualizar taller:', error);
@@ -277,15 +293,16 @@ export class DatosComponent {
     }
   }
 
-  // Eliminar un taller por ID
+  // Elimina un taller mediante petición DELETE.
   deleteTaller() {
     const id = this.tallerDeleteForm.value.id;
     if (this.crudUrl && id) {
+      // Se realiza la petición DELETE a la URL construida con el ID del taller.
       this.http.delete(`${this.crudUrl}/${id}`, { responseType: 'text' }).subscribe(
         data => {
           console.log('Taller eliminado:', data);
           alert('Taller eliminado exitosamente: ' + data);
-          this.tallerDeleteForm.reset();
+          this.tallerDeleteForm.reset(); // Se limpia el formulario
         },
         error => {
           console.error('Error al eliminar taller:', error);
@@ -294,9 +311,4 @@ export class DatosComponent {
       );
     }
   }
-
-
-
-
-
 }
